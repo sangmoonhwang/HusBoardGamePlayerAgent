@@ -1,0 +1,3 @@
+2,Human,Human,1,Human,40,game00002.log,
+3,xxxxxxxxx,RandomHusPlayer,1,RandomHusPlayer,23,game00003.log,
+4,RandomHusPlayer,xxxxxxxxx,1,xxxxxxxxx,18,game00004.log,
