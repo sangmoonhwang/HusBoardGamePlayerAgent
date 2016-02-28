@@ -46,7 +46,7 @@ public class StudentPlayer extends HusPlayer {
       if (System.nanoTime() - startTime > 1900000000) // 1.9 seconds or more has elapsed
         break;
     }
-    System.out.println((System.nanoTime() - startTime) / 1);
+    System.out.println((System.nanoTime() - startTime) / 1000000000.0 + "s");
 //    return pq.poll().move;
     return MyTools.getMoveFromPQ(pq);
   }
