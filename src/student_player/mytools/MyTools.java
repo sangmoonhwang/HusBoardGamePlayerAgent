@@ -32,12 +32,20 @@ public class MyTools {
       return pq.poll().move;
     else if (r % 2 == 0) {
       // Remove the first head
-      pq.poll();
-      return pq.poll().move;
+      HusMove hm = pq.poll().move;
+      if (pq.isEmpty())
+        return hm;
+      else
+        return pq.poll().move;
     } else {
       // Remove the first head
-      pq.poll();
-      return pq.poll().move;
+      HusMove hm = pq.poll().move;
+      if (pq.isEmpty()) return hm;
+      hm = pq.poll().move;
+      if (pq.isEmpty())
+        return hm;
+      else
+        return pq.poll().move;
     }
   }
 
