@@ -70,7 +70,11 @@ public class MyTools {
     int[] my_pits = pits[player_id];
     int[] op_pits = pits[opponent_id];
 
-    return getCost(my_pits) - getCost(op_pits);
+    double fCost = getfCost(cloned_board_state, player_id, opponent_id, 1);
+    // cloned_board_state.move(cloned_board_state.getRandomMove());
+    // System.out.println(cloned_board_state.getTurnPlayer());
+
+    return (getCost(my_pits) - getCost(op_pits)) + fCost;
   }
 
   private static double getCost(int[] myPits) {
@@ -85,6 +89,30 @@ public class MyTools {
         capturableSeeds += myPits[i] + myPits[NEIGHBORS[i]];
     }
     return (double) frozenPits + (capturableSeeds / (double) totalSeeds);
+  }
+
+  private static double getfCost(HusBoardState cloned_board_state,
+      int player_id, int opponent_id, int depth) {
+    if (cloned_board_state.gameOver()) return 0;
+    HusBoardState future = null;
+    // Maximum cost difference in one turn ahead between the player and the
+    // opponent
+    double futureMax = 0;
+    double avg = 0;
+    depth--;
+    for (HusMove hm : cloned_board_state.getLegalMoves()) {
+      future = (HusBoardState) cloned_board_state.clone();
+      if (future.move(hm)) {
+        int[][] fpits = future.getPits();
+        double c = getCost(fpits[player_id]) - getCost(fpits[opponent_id]);
+        avg += c;
+        if (c > futureMax) {
+          futureMax = c;
+        }
+      }
+    }
+    avg /= cloned_board_state.getLegalMoves().size();
+    return (0.1 * avg + 0.9 * futureMax);
   }
 
   public static class PQsort implements Comparator<MoveAndCost> {
