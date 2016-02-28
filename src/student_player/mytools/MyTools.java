@@ -28,7 +28,7 @@ public class MyTools {
 
   public static HusMove getMoveFromPQ(PriorityQueue<MoveAndCost> pq) {
     double r = Math.random();
-    if (r < 0.41)
+    if (r < 0.81)
       return pq.poll().move;
     else if (r % 2 == 0) {
       // Remove the first head
