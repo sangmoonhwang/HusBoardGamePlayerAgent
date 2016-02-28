@@ -70,7 +70,7 @@ public class MyTools {
     int[] my_pits = pits[player_id];
     int[] op_pits = pits[opponent_id];
 
-    double fCost = getfCost(cloned_board_state, player_id, opponent_id, 1);
+    double fCost = getfCost(cloned_board_state, player_id, opponent_id);
     // cloned_board_state.move(cloned_board_state.getRandomMove());
     // System.out.println(cloned_board_state.getTurnPlayer());
 
@@ -92,14 +92,13 @@ public class MyTools {
   }
 
   private static double getfCost(HusBoardState cloned_board_state,
-      int player_id, int opponent_id, int depth) {
+      int player_id, int opponent_id) {
     if (cloned_board_state.gameOver()) return 0;
     HusBoardState future = null;
     // Maximum cost difference in one turn ahead between the player and the
     // opponent
     double futureMax = 0;
     double avg = 0;
-    depth--;
     for (HusMove hm : cloned_board_state.getLegalMoves()) {
       future = (HusBoardState) cloned_board_state.clone();
       if (future.move(hm)) {
